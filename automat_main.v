@@ -25,7 +25,6 @@ assign HEX3 = 7'b1111111;
 assign HEX2 = 7'b1111111;
 assign HEX1 = 7'b1111111;
 assign HEX0 = 7'b1111111;
-
 assign LEDG[7:0] <= {8{currentState == state1100111}};
 
 always@(posedge ~KEY[3] or posedge ~KEY[0]) begin
@@ -34,7 +33,6 @@ always@(posedge ~KEY[3] or posedge ~KEY[0]) begin
 	      register <= 10'b0;
 	      LEDR[9:0] <= register[9:0];
 	end
-	
 	else begin
 		register <= {register[8:0], SW[0]};
 		LEDR[9:0] <= register[9:0];
