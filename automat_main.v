@@ -1,5 +1,4 @@
 module automat_main(
-
 	input [0:0] SW, 
 	input [3:0] KEY, 
 	input CLOCK_50, 
@@ -10,8 +9,7 @@ module automat_main(
 	output [7:0] HEX0, 
 	output reg [9:0] LEDR,         // красные диоды, показывающие значение в регистре
 	output reg [2:0] currentState, // регистр для хранения текущего состояния
-	output reg [9:0] register
-	
+	output reg [9:0] register	
 );
 
 parameter [1:0] reset = 0;
@@ -46,9 +44,7 @@ always@(posedge ~KEY[3] or posedge ~KEY[0]) begin
 			state110011: currentState <= SW[0] ? state1100111 : state1;
 			state1100111: currentState <= SW[0] ? state1 : reset;
 			default currentState <= reset;
-	
 		endcase
 	end
 end
-
 endmodule	
