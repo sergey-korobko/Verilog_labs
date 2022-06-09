@@ -28,30 +28,30 @@ assign HEX2 = 7'b1111111;
 assign HEX1 = 7'b1111111;
 assign HEX0 = 7'b1111111;
 
-assign LEDG[7:0] = {8{currentState == state1100111}};
+assign LEDG[7:0] <= {8{currentState == state1100111}};
 
 always@(posedge ~KEY[3] or posedge ~KEY[0]) begin
 	if (~KEY[0]) begin
-	      currentState = reset;
-		 	register = 10'b0;
-			LEDR[9:0] = register[9:0];
+	      currentState <= reset;
+		 	register <= 10'b0;
+			LEDR[9:0] <= register[9:0];
 	end
 	
 	else begin
-		register ={register[8:0], SW[0]};
-		LEDR[9:0] = register[9:0];
+		register <= {register[8:0], SW[0]};
+		LEDR[9:0] <= register[9:0];
 	
 		case(currentState)
 	
-			reset: currentState = SW[0] ? state1 : reset;
-			state1: currentState = SW[0] ? state11 : reset;
-			state11: currentState = ~SW[0] ? state110 : state11;
-			state110: currentState = ~SW[0] ? state1100 : state1;
-			state1100: currentState = SW[0] ? state11001 : reset;
-			state11001: currentState = SW[0] ? state110011 : reset;
-			state110011: currentState = SW[0] ? state1100111 : state1;
-			state1100111: currentState = SW[0] ? state1 : reset;
-			default currentState = reset;
+			reset: currentState <= SW[0] ? state1 : reset;
+			state1: currentState <= SW[0] ? state11 : reset;
+			state11: currentState <= ~SW[0] ? state110 : state11;
+			state110: currentState <= ~SW[0] ? state1100 : state1;
+			state1100: currentState <= SW[0] ? state11001 : reset;
+			state11001: currentState <= SW[0] ? state110011 : reset;
+			state110011: currentState <= SW[0] ? state1100111 : state1;
+			state1100111: currentState <= SW[0] ? state1 : reset;
+			default currentState <= reset;
 	
 		endcase
 	end
